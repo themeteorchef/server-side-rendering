@@ -46,7 +46,6 @@ class App extends React.Component {
     const { props } = this;
     return (
       <div className="App">
-        {console.log(props)}
         {props.authenticated ?
           <VerifyEmailAlert
             userId={props.userId}
@@ -60,7 +59,7 @@ class App extends React.Component {
             <Route exact name="index" path="/" component={Index} />
             <Authenticated exact path="/documents" component={Documents} {...props} />
             <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
-            <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
+            <Route exact path="/documents/:_id" component={ViewDocument} {...props} />
             <Authenticated exact path="/documents/:_id/edit" component={EditDocument} {...props} />
             <Authenticated exact path="/profile" component={Profile} {...props} />
             <Public path="/signup" component={Signup} {...props} />

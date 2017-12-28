@@ -4,6 +4,15 @@ import Documents from './Documents';
 import rateLimit from '../../modules/rate-limit';
 
 Meteor.methods({
+  'documents.findOne': function documentsFindOne(documentId) {
+    check(documentId, String);
+
+    try {
+      return Documents.findOne({ _id: documentId });
+    } catch (exception) {
+      throw new Meteor.Error('500', exception);
+    }
+  },
   'documents.insert': function documentsInsert(doc) {
     check(doc, {
       title: String,

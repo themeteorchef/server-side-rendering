@@ -11,8 +11,8 @@ import App from '../../ui/layouts/App/App';
 import mainReducer from '../../modules/redux/reducers';
 
 onPageLoad((sink) => {
-  // const isDocument = sink.request.url.pathname.includes('/documents/');
-  // const documentId = isDocument ? sink.request.url.pathname.replace('/documents/', '') : '';
+  const isDocument = sink.request.url.pathname.includes('/documents/');
+  const documentId = isDocument ? sink.request.url.pathname.replace('/documents/', '') : '';
 
   const context = {};
   const data = {
@@ -26,8 +26,7 @@ onPageLoad((sink) => {
     emailVerified: false,
     terms: Meteor.call('utility.getPage', 'terms'),
     privacy: Meteor.call('utility.getPage', 'privacy'),
-    // documents: Meteor.call('documents.find'),
-    // doc: Meteor.call('documents.findOne', documentId),
+    doc: Meteor.call('documents.findOne', documentId),
   };
 
   const store = createStore(mainReducer, data, applyMiddleware(thunk));

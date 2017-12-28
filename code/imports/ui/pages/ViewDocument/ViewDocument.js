@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -40,27 +42,26 @@ const renderDocument = (doc, match, history) => (doc ? (
 
 const ViewDocument = ({
   loading, doc, match, history,
-}) => (
-  !loading ? renderDocument(doc, match, history) : <Loading />
-);
+}) => (renderDocument(doc, match, history));
 
 ViewDocument.defaultProps = {
   doc: null,
 };
 
 ViewDocument.propTypes = {
-  loading: PropTypes.bool.isRequired,
   doc: PropTypes.object,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-export default withTracker(({ match }) => {
-  const documentId = match.params._id;
-  const subscription = Meteor.subscribe('documents.view', documentId);
+export default compose(
+  connect(state => ({ ...state })),
+  withTracker(({ match }) => {
+    const documentId = match.params._id;
+    if (Meteor.isClient) Meteor.subscribe('documents.view', documentId);
 
-  return {
-    loading: !subscription.ready(),
-    doc: Documents.findOne(documentId),
-  };
-})(ViewDocument);
+    return {
+      doc: Documents.findOne(documentId),
+    };
+  }),
+)(ViewDocument);
