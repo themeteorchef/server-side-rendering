@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PublicNavigation from '../PublicNavigation/PublicNavigation';
 import AuthenticatedNavigation from '../AuthenticatedNavigation/AuthenticatedNavigation';
 
-import './Navigation.scss';
+if (Meteor.isClient) import './Navigation.scss';
 
 const Navigation = props => (
   <Navbar>

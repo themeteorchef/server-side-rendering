@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PageHeader.scss';
+if (Meteor.isClient) import './PageHeader.scss';
 
 const PageHeader = ({ title, subtitle }) => (
   <div className="PageHeader">

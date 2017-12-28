@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './AccountPageFooter.scss';
+if (Meteor.isClient) import './AccountPageFooter.scss';
 
 const AccountPageFooter = ({ children }) => (
   <div className="AccountPageFooter">

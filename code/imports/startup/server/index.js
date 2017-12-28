@@ -1,3 +1,4 @@
+import './ssr';
 import './accounts';
 import '../both/api';
 import './api';

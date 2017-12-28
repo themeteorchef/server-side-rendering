@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import Icon from '../../components/Icon/Icon';
 
-import './Logout.scss';
+if (Meteor.isClient) import './Logout.scss';
 
 class Logout extends React.Component {
   componentDidMount() {

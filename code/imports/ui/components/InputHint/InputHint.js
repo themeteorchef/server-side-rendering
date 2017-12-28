@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './InputHint.scss';
+if (Meteor.isClient) import './InputHint.scss';
 
 const InputHint = ({ children }) => (
   <div className="InputHint">

@@ -9,7 +9,7 @@ import DocumentsCollection from '../../../api/Documents/Documents';
 import { timeago, monthDayYearAtTime } from '../../../modules/dates';
 import Loading from '../../components/Loading/Loading';
 
-import './Documents.scss';
+if (Meteor.isClient) import './Documents.scss';
 
 const handleRemove = (documentId) => {
   if (confirm('Are you sure? This is permanent!')) {

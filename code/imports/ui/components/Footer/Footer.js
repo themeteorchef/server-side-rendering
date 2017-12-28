@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Grid } from 'react-bootstrap';
 import { year } from '../../../modules/dates';
 
-import './Footer.scss';
+if (Meteor.isClient) import './Footer.scss';
 
 const copyrightYear = () => {
   const currentYear = year();

@@ -2,9 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Grid } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import Navigation from '../../components/Navigation/Navigation';
@@ -29,13 +31,22 @@ import Privacy from '../../pages/Privacy/Privacy';
 import ExamplePage from '../../pages/ExamplePage/ExamplePage';
 import VerifyEmailAlert from '../../components/VerifyEmailAlert/VerifyEmailAlert';
 import getUserName from '../../../modules/get-user-name';
+import { onLogin, onLogout } from '../../../modules/redux/actions';
 
-import './App.scss';
+if (Meteor.isClient) import './App.scss';
 
-const App = props => (
-  <Router>
-    {!props.loading ? (
+class App extends React.Component {
+  componentDidMount() {
+    const { handleOnLogin, handleOnLogout } = this.props;
+    Accounts.onLogin(() => handleOnLogin());
+    Accounts.onLogout(() => handleOnLogout());
+  }
+
+  render() {
+    const { props } = this;
+    return (
       <div className="App">
+        {console.log(props)}
         {props.authenticated ?
           <VerifyEmailAlert
             userId={props.userId}
@@ -66,9 +77,9 @@ const App = props => (
         </Grid>
         <Footer />
       </div>
-    ) : ''}
-  </Router>
-);
+    );
+  }
+}
 
 App.defaultProps = {
   userId: '',
@@ -83,22 +94,30 @@ App.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-export default withTracker(() => {
-  const loggingIn = Meteor.loggingIn();
-  const user = Meteor.user();
-  const userId = Meteor.userId();
-  const loading = !Roles.subscription.ready();
-  const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
-  const emailAddress = user && user.emails && user.emails[0].address;
+// export default withTracker(() => {
+//   const loggingIn = Meteor.loggingIn();
+//   const user = Meteor.user();
+//   const userId = Meteor.userId();
+//   const loading = !Roles.subscription.ready();
+//   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
+//   const emailAddress = user && user.emails && user.emails[0].address;
+//
+//   return {
+//     loading,
+//     loggingIn,
+//     authenticated: !loggingIn && !!userId,
+//     name: name || emailAddress,
+//     roles: !loading && Roles.getRolesForUser(userId),
+//     userId,
+//     emailAddress,
+//     emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true,
+//   };
+// })(App);
 
-  return {
-    loading,
-    loggingIn,
-    authenticated: !loggingIn && !!userId,
-    name: name || emailAddress,
-    roles: !loading && Roles.getRolesForUser(userId),
-    userId,
-    emailAddress,
-    emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true,
-  };
-})(App);
+const mapStateToProps = state => ({ ...state });
+const mapDispatchToProps = dispatch => ({
+  handleOnLogin: data => dispatch(onLogin(data)),
+  handleOnLogout: data => dispatch(onLogout(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

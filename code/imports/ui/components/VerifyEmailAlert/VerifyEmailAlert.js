@@ -4,7 +4,7 @@ import { Alert, Button } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 
-import './VerifyEmailAlert.scss';
+if (Meteor.isClient) import './VerifyEmailAlert.scss';
 
 const handleResendVerificationEmail = (emailAddress) => {
   Meteor.call('users.sendVerificationEmail', (error) => {

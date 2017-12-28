@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 import OAuthLoginButton from '../OAuthLoginButton/OAuthLoginButton';
 
-import './OAuthLoginButtons.scss';
+if (Meteor.isClient) import './OAuthLoginButtons.scss';
 
 const OAuthLoginButtons = ({ services, emailMessage }) => (services.length ? (
   <div className={`OAuthLoginButtons ${emailMessage ? 'WithEmailMessage' : ''}`}>

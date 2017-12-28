@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Icon from '../Icon/Icon';
 
-import './OAuthLoginButton.scss';
+if (Meteor.isClient) import './OAuthLoginButton.scss';
 
 const handleLogin = (service, callback) => {
   const options = {

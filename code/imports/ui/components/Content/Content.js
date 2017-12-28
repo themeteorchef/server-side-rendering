@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Content.scss';
+if (Meteor.isClient) import './Content.scss';
 
 const Content = ({ content }) => (
   <div className="Content" dangerouslySetInnerHTML={{ __html: content }} />

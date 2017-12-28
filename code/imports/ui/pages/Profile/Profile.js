@@ -11,7 +11,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import InputHint from '../../components/InputHint/InputHint';
 import validate from '../../../modules/validate';
 
-import './Profile.scss';
+if (Meteor.isClient) import './Profile.scss';
 
 class Profile extends React.Component {
   constructor(props) {
