@@ -53,6 +53,7 @@ Meteor.methods({
 
 rateLimit({
   methods: [
+    'documents.findOne',
     'documents.insert',
     'documents.update',
     'documents.remove',
