@@ -9,5 +9,5 @@ Meteor.publish('documents', function documents() {
 // Note: documents.view is also used when editing an existing document.
 Meteor.publish('documents.view', function documentsView(documentId) {
   check(documentId, String);
-  return Documents.find({ _id: documentId, owner: this.userId });
+  return Documents.find({ _id: documentId });
 });

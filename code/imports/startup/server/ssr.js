@@ -40,9 +40,9 @@ onPageLoad((sink) => {
     </Provider>
   ));
 
-  // const helmet = Helmet.renderStatic();
-  // sink.appendToHead(helmet.meta.toString());
-  // sink.appendToHead(helmet.title.toString());
+  const helmet = Helmet.renderStatic();
+  sink.appendToHead(helmet.meta.toString());
+  sink.appendToHead(helmet.title.toString());
 
   sink.appendToBody(`
     <script>

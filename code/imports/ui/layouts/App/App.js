@@ -93,26 +93,6 @@ App.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-// export default withTracker(() => {
-//   const loggingIn = Meteor.loggingIn();
-//   const user = Meteor.user();
-//   const userId = Meteor.userId();
-//   const loading = !Roles.subscription.ready();
-//   const name = user && user.profile && user.profile.name && getUserName(user.profile.name);
-//   const emailAddress = user && user.emails && user.emails[0].address;
-//
-//   return {
-//     loading,
-//     loggingIn,
-//     authenticated: !loggingIn && !!userId,
-//     name: name || emailAddress,
-//     roles: !loading && Roles.getRolesForUser(userId),
-//     userId,
-//     emailAddress,
-//     emailVerified: user && user.emails ? user && user.emails && user.emails[0].verified : true,
-//   };
-// })(App);
-
 const mapStateToProps = state => ({ ...state });
 const mapDispatchToProps = dispatch => ({
   handleOnLogin: data => dispatch(onLogin(data)),

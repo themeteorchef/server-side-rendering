@@ -4,13 +4,23 @@ import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
+import SEO from '../../components/SEO/SEO';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import Content from '../../components/Content/Content';
 
 if (Meteor.isClient) import './Page.scss';
 
-const Page = ({ title, subtitle, content }) => (
+const Page = ({ title, subtitle, content, page }) => (
   <div className="Page">
+    <SEO
+      title={title}
+      description={subtitle}
+      url={page}
+      contentType="article"
+      published={(new Date()).toISOString()}
+      updated={(new Date()).toISOString()}
+      twitter="themeteorchef"
+    />
     <PageHeader title={title} subtitle={subtitle} />
     <Content content={content} />
   </div>

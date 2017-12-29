@@ -9,6 +9,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import Documents from '../../../api/Documents/Documents';
 import NotFound from '../NotFound/NotFound';
 import Loading from '../../components/Loading/Loading';
+import SEO from '../../components/SEO/SEO';
 
 const handleRemove = (documentId, history) => {
   if (confirm('Are you sure? This is permanent!')) {
@@ -25,6 +26,15 @@ const handleRemove = (documentId, history) => {
 
 const renderDocument = (doc, match, history) => (doc ? (
   <div className="ViewDocument">
+    <SEO
+      title={doc.title}
+      description={doc.body}
+      url={`documents/${doc._id}`}
+      contentType="article"
+      published={doc.createdAt}
+      updated={doc.updatedAt}
+      twitter="themeteorchef"
+    />
     <div className="page-header clearfix">
       <h4 className="pull-left">{ doc && doc.title }</h4>
       <ButtonToolbar className="pull-right">
