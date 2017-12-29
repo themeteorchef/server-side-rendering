@@ -1,6 +1,6 @@
 #### Tutorial: Server Side Rendering
 
-Description of this tutorial goes here. Used in your tutorial repo's README.md file.
+In this tutorial, we'll learn how to use the `server-render` package from the Meteor Development Group. We'll see how to convert Pup—the boilerplate used for tutorials at TMC—to use server-side rendering by default.
 
 [Read this tutorial on The Meteor Chef](https://themeteorchef.com/tutorials/server-side-rendering)  
 
